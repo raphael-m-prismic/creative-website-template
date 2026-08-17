@@ -1,0 +1,9 @@
+{
+  "repositoryName": "creative-website-template",
+  "routes": [
+    {
+      "type": "experience_template",
+      "path": "/experience-template"
+    }
+  ]
+}
