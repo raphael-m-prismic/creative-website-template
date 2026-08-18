@@ -5,6 +5,7 @@ import { DoubleSide } from "three";
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
 
+import { CameraRig, CameraRigControls } from "./CameraRig";
 import { Items } from "./Items";
 import { Locker } from "./Locker";
 import type { LockerItem } from "./resolveItems";
@@ -16,7 +17,7 @@ export function Scene({ items }: { items: LockerItem[] }) {
 	const debug = useDebug();
 
 	return (
-		<Canvas camera={{ position: [0, 0, 3.6], fov: 40 }} dpr={[1, 2]} shadows>
+		<Canvas camera={{ fov: 40 }} dpr={[1, 2]} shadows>
 			<color attach="background" args={['#ffffff']} />
 
 			<Environment preset="sunset" />
@@ -52,7 +53,20 @@ export function Scene({ items }: { items: LockerItem[] }) {
 				/>
 			</mesh>
 
-			<OrbitControls enablePan={false} />
+			{/**
+			 * Exactly one camera owner at a time: OrbitControls to inspect and place
+			 * items, the pointer rig for the real thing. Both would fight over the
+			 * camera transform every frame.
+			 */}
+			{debug ? (
+				<>
+					<OrbitControls enablePan={false} />
+					<CameraRigControls />
+				</>
+			) : (
+				<CameraRig />
+			)}
+
 			{debug && <axesHelper args={[2]} />}
 		</Canvas>
 	);

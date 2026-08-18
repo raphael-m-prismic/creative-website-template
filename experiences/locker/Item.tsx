@@ -47,7 +47,12 @@ export function Item({ item, position, rotation, height }: Props) {
 			</group>
 
 			{hovered && item.label && (
-				<Html position={[0, height / 2 + 0.06, 0]} center zIndexRange={[10, 0]}>
+				<Html
+					position={[0, height / 2 + 0.06, 0]}
+					center
+					zIndexRange={[10, 0]}
+					style={{ pointerEvents: "none" }}
+				>
 					<span
 						className="pointer-events-none block whitespace-nowrap px-7 py-2 text-[13px] font-bold italic leading-none tracking-wide text-white"
 						style={{
