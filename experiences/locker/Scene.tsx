@@ -10,7 +10,7 @@ import { Items } from "./Items";
 import { Locker } from "./Locker";
 import { SceneReady } from "../_shared/SceneReady";
 import type { LockerItem } from "./resolveItems";
-import { useDebug } from "./useDebug";
+import { useDebug } from "../_shared/useDebug";
 
 const GROUND_Y = -0.941;
 

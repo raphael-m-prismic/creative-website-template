@@ -67,10 +67,11 @@ The DOM overlay is the deliberate exception: it consumes Prismic fields directly
 
 ## What is shared, and what is not
 
-`experiences/_shared` holds the _when_ of loading, never the _what_:
+`experiences/_shared` holds the _when_, never the _what_ — timing and flags, no design:
 
 - `useLoadingScreen` — headless: returns state and props to spread, no markup, no class names.
 - `SceneReady` / `useSceneReady` — bridges inside-the-Canvas to outside. A loading screen is DOM and cannot see frames, so something in the scene reports out once assets have resolved _and_ a few frames have actually been painted. Decoding finishing is not the same as the scene being on screen.
+- `useDebug` / `DebugPanel` — reads `?debug` after mount, so SSR and the first render agree, and mounts leva when it is set. _Whether_ the panel is open is shared; what each experience puts in it is not.
 
 Everything else belongs to its experience: each one writes its own loading screen, its own lights, its own camera, its own scene graph. Two creative experiences have nothing visual in common, and a shared abstraction trying to cover both would be worked around by the third.
 

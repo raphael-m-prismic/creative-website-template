@@ -3,6 +3,7 @@
 import type { Content } from "@prismicio/client";
 
 import { useSceneReady } from "../_shared/useSceneReady";
+import { DebugPanel } from "../_shared/DebugPanel";
 import { LoadingScreen } from "./LoadingScreen";
 import { Overlay } from "./Overlay";
 import { Scene } from "./Scene";
@@ -22,6 +23,7 @@ export default function TemplateExperienceView({ experience, content }: Props) {
 			<Overlay content={content} />
 			{/* Last, so it paints over the overlay while it is up. */}
 			<LoadingScreen ready={ready} />
+			<DebugPanel />
 		</div>
 	);
 }

@@ -3,7 +3,7 @@
 import type { Content } from "@prismicio/client";
 
 import { useSceneReady } from "../_shared/useSceneReady";
-import { DebugPanel } from "./DebugPanel";
+import { DebugPanel } from "../_shared/DebugPanel";
 import { LoadingScreen } from "./LoadingScreen";
 import { Overlay } from "./Overlay";
 import { Scene } from "./Scene";
