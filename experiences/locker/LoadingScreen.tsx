@@ -4,15 +4,11 @@ import { useLoadingScreen } from "../_shared/useLoadingScreen";
 
 type Props = {
 	text: string | null;
-	/** True once the scene has loaded *and* drawn. See _shared/SceneReady. */
+	/** Loaded and drawn. See _shared/SceneReady. */
 	ready: boolean;
 };
 
-/**
- * The locker's own loading screen: light, to match the scene it uncovers. All
- * of the *when* lives in useLoadingScreen; everything here is *what it looks
- * like*, free to grow images or extra copy without touching shared code.
- */
+/** Light, to match the scene it uncovers. useLoadingScreen owns the timing. */
 export function LoadingScreen({ text, ready }: Props) {
 	const { done, progress, containerProps } = useLoadingScreen({ ready });
 

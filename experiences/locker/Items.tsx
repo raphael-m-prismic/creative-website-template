@@ -11,10 +11,7 @@ type Props = {
 	debug: boolean;
 };
 
-/**
- * Wraps one item with leva sliders. Read the values in the panel, then paste
- * them into slots.ts — the panel is a placement tool, not a content feature.
- */
+/** Leva sliders for one item: read values, paste into slots.ts. */
 function DebugItem({ item, slot }: { item: LockerItem; slot: Slot }) {
 	const values = useControls(`${item.uid}`, {
 		positionX: { value: slot.position[0], min: -1, max: 1, step: 0.01 },

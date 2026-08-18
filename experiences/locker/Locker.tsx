@@ -10,18 +10,12 @@ export function Locker() {
 	const { scene } = useGLTF(MODEL_PATH);
 	const ref = useRef<Group>(null);
 
-	/**
-	 * Dev helper: logs the model's real dimensions once, so slot coordinates
-	 * can be written against actual numbers instead of guesses.
-	 */
 	useLayoutEffect(() => {
 		if (process.env.NODE_ENV === "production" || !ref.current) return;
 
 		const box = new Box3().setFromObject(ref.current);
 		const size = box.getSize(new Vector3());
-		console.log(
-			`[locker] model size — x: ${size.x.toFixed(2)}, y: ${size.y.toFixed(2)}, z: ${size.z.toFixed(2)}`,
-		);
+
 	}, []);
 
 	useLayoutEffect(() => {

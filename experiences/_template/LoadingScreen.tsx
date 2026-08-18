@@ -2,17 +2,10 @@
 
 import { useLoadingScreen } from "../_shared/useLoadingScreen";
 
-/**
- * Copy lives here, not in Prismic: this experience's loading screen is part of
- * the scaffolding, not something an editor fills in. Swap it for a document
- * field if a real experience needs it editable — the locker does exactly that.
- */
+/** Static: this screen is scaffolding. The locker reads its copy from Prismic. */
 const TEXT = "Loading";
 
-/**
- * The template's own loading screen: dark, to match the scene it uncovers.
- * useLoadingScreen owns the *when*; this file owns the *what*.
- */
+/** Dark, to match the scene it uncovers. useLoadingScreen owns the timing. */
 export function LoadingScreen({ ready }: { ready: boolean }) {
 	const { done, progress, containerProps } = useLoadingScreen({ ready });
 

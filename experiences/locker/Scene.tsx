@@ -59,11 +59,7 @@ export function Scene({ items, onReady }: Props) {
 				/>
 			</mesh>
 
-			{/**
-			 * Exactly one camera owner at a time: OrbitControls to inspect and place
-			 * items, the pointer rig for the real thing. Both would fight over the
-			 * camera transform every frame.
-			 */}
+			{/* One camera owner at a time: both would fight over the transform. */}
 			{debug ? (
 				<>
 					<OrbitControls enablePan={false} />

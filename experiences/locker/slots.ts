@@ -1,10 +1,9 @@
 /**
- * Slots are declared here and only here. Content decides *what* goes in the
- * locker; this file decides *where*. Objects fill the slots top to bottom in
- * the order they appear in Prismic.
+ * Content decides what goes in the locker, this file decides where. Filled top
+ * to bottom in Prismic order.
  *
- * Model is 0.63 x 1.88 x 0.89 and centered at the origin, so the usable
- * interior runs roughly x -0.31..0.31, y -0.94..0.94, back wall at z -0.44.
+ * Model is 0.63 x 1.88 x 0.89, centered: interior x -0.31..0.31, y -0.94..0.94,
+ * back wall z -0.44.
  */
 export type Slot = {
 	position: [number, number, number];
