@@ -8,19 +8,23 @@ import { Environment, OrbitControls } from "@react-three/drei";
 import { CameraRig, CameraRigControls } from "./CameraRig";
 import { Items } from "./Items";
 import { Locker } from "./Locker";
+import { SceneReady } from "./SceneReady";
 import type { LockerItem } from "./resolveItems";
 import { useDebug } from "./useDebug";
 
 const GROUND_Y = -0.941;
 
-export function Scene({ items }: { items: LockerItem[] }) {
+type Props = {
+	items: LockerItem[];
+	onReady: () => void;
+};
+
+export function Scene({ items, onReady }: Props) {
 	const debug = useDebug();
 
 	return (
 		<Canvas camera={{ fov: 40 }} dpr={[1, 2]} shadows>
 			<color attach="background" args={['#ffffff']} />
-
-			<Environment preset="sunset" />
 
 			<directionalLight
 				position={[-3, 6, -2]}
@@ -37,8 +41,10 @@ export function Scene({ items }: { items: LockerItem[] }) {
 			/>
 
 			<Suspense fallback={null}>
+				<Environment preset="sunset" />
 				<Locker />
 				<Items items={items} debug={debug} />
+				<SceneReady onReady={onReady} />
 			</Suspense>
 
 			<mesh
