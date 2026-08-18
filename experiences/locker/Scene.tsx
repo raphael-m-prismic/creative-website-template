@@ -8,7 +8,7 @@ import { Environment, OrbitControls } from "@react-three/drei";
 import { CameraRig, CameraRigControls } from "./CameraRig";
 import { Items } from "./Items";
 import { Locker } from "./Locker";
-import { SceneReady } from "./SceneReady";
+import { SceneReady } from "../_shared/SceneReady";
 import type { LockerItem } from "./resolveItems";
 import { useDebug } from "./useDebug";
 

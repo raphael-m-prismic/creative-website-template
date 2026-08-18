@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useTexture } from "@react-three/drei";
 import { SRGBColorSpace } from "three";
 
+import { SceneReady } from "../_shared/SceneReady";
 import type { TemplateExperience } from "./resolveContent";
 
 function TexturedMaterial({ url, color }: { url: string; color: string }) {
@@ -30,13 +31,19 @@ function Cube({ experience }: { experience: TemplateExperience }) {
 	);
 }
 
-export function Scene({ experience }: { experience: TemplateExperience }) {
+type Props = {
+	experience: TemplateExperience;
+	onReady: () => void;
+};
+
+export function Scene({ experience, onReady }: Props) {
 	return (
 		<Canvas camera={{ position: [0, 0, 7], fov: 45 }} dpr={[1, 2]}>
 			<ambientLight intensity={0.7} />
 			<directionalLight position={[4, 5, 6]} intensity={2.5} />
 			<Suspense fallback={null}>
 				<Cube experience={experience} />
+				<SceneReady onReady={onReady} />
 			</Suspense>
 			<OrbitControls enablePan={false} />
 		</Canvas>

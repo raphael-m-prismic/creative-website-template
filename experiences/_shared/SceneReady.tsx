@@ -12,9 +12,11 @@ import { useFrame } from "@react-three/fiber";
 const READY_FRAMES = 3;
 
 /**
- * Mounted inside the Suspense boundary, so it exists only once every asset has
- * resolved, and then waits for real frames on top of that: assets finishing
- * their decode is not the same thing as the locker being on screen.
+ * Bridges inside-the-Canvas to outside: a loading screen is DOM, so it cannot
+ * see frames and something in the scene has to report out. Mounted inside a
+ * Suspense boundary it exists only once every asset in that boundary has
+ * resolved, then waits for real frames on top of that — assets finishing their
+ * decode is not the same thing as the scene being on screen.
  */
 export function SceneReady({ onReady }: { onReady: () => void }) {
 	const frames = useRef(0);

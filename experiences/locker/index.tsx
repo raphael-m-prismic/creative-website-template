@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import type { Content } from "@prismicio/client";
 
+import { useSceneReady } from "../_shared/useSceneReady";
 import { DebugPanel } from "./DebugPanel";
 import { LoadingScreen } from "./LoadingScreen";
 import { Overlay } from "./Overlay";
@@ -15,16 +15,11 @@ type Props = {
 };
 
 export default function LockerExperienceView({ items, content }: Props) {
-	/**
-	 * The loading screen covers the overlay too, so it has to outlive the assets:
-	 * it lifts here because only the Canvas knows when the locker is really on
-	 * screen, and LoadingScreen sits outside the Canvas.
-	 */
-	const [ready, setReady] = useState(false);
+	const { ready, onReady } = useSceneReady();
 
 	return (
 		<div className="relative h-dvh w-full bg-white">
-			<Scene items={items} onReady={() => setReady(true)} />
+			<Scene items={items} onReady={onReady} />
 			<Overlay content={content} />
 			<LoadingScreen text={content.loading_text} ready={ready} />
 			<DebugPanel />
