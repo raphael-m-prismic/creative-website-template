@@ -14,7 +14,7 @@ export function Overlay({ content }: Props) {
 					field={content.title}
 					components={{
 						heading1: ({ children }) => (
-							<h1 className="text-3xl font-semibold tracking-tight text-white drop-shadow">
+							<h1 className="text-3xl font-semibold tracking-tight text-neutral-900">
 								{children}
 							</h1>
 						),
@@ -23,7 +23,7 @@ export function Overlay({ content }: Props) {
 			</header>
 
 			<footer className="flex max-w-md flex-col items-start gap-4">
-				<div className="text-md leading-relaxed text-white/80">
+				<div className="text-md leading-relaxed text-neutral-600">
 					<PrismicRichText field={content.description} />
 				</div>
 
@@ -31,7 +31,7 @@ export function Overlay({ content }: Props) {
 					<PrismicNextLink
 						key={i}
 						field={link}
-						className="pointer-events-auto rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition-colors hover:bg-white/80"
+						className="pointer-events-auto rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-700"
 					/>
 				))}
 			</footer>

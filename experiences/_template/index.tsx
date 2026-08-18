@@ -17,7 +17,7 @@ export default function TemplateExperienceView({ experience, content }: Props) {
 	const { ready, onReady } = useSceneReady();
 
 	return (
-		<div className="relative h-dvh w-full bg-neutral-900">
+		<div className="relative h-dvh w-full bg-white">
 			<Scene experience={experience} onReady={onReady} />
 			<Overlay content={content} />
 			{/* Last, so it paints over the overlay while it is up. */}

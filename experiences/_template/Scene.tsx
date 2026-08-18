@@ -39,7 +39,7 @@ type Props = {
 export function Scene({ experience, onReady }: Props) {
 	return (
 		<Canvas camera={{ position: [0, 0, 7], fov: 45 }} dpr={[1, 2]}>
-			<ambientLight intensity={0.7} />
+			<ambientLight intensity={2} />
 			<directionalLight position={[4, 5, 6]} intensity={2.5} />
 			<Suspense fallback={null}>
 				<Cube experience={experience} />
