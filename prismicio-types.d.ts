@@ -170,7 +170,165 @@ interface ExperienceTemplateDocumentData {
  */
 export type ExperienceTemplateDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<ExperienceTemplateDocumentData>, "experience_template", Lang>;
 
-export type AllDocumentTypes = ExperienceTemplateDocument;
+/**
+ * Item in *locker_experience → Objects*
+ */
+export interface LockerExperienceDocumentDataObjectsItem {
+	/**
+	 * Image field in *locker_experience → Objects*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locker_experience.objects[].image
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	image: prismic.ImageField<never>;
+	
+	/**
+	 * uid field in *locker_experience → Objects*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locker_experience.objects[].uid
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	uid: prismic.KeyTextField;
+	
+	/**
+	 * Label field in *locker_experience → Objects*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locker_experience.objects[].label
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	label: prismic.KeyTextField;
+	
+	/**
+	 * Link field in *locker_experience → Objects*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locker_experience.objects[].link
+	 * - **Documentation**: https://prismic.io/docs/fields/link
+	 */
+	link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+type LockerExperienceDocumentDataSlicesSlice = never
+
+/**
+ * Content for locker_experience documents
+ */
+interface LockerExperienceDocumentData {
+	/**
+	 * Objects field in *locker_experience*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locker_experience.objects[]
+	 * - **Tab**: Experience
+	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+	 */
+	objects: prismic.GroupField<Simplify<LockerExperienceDocumentDataObjectsItem>>;
+	
+	/**
+	 * Slice Zone field in *locker_experience*
+	 *
+	 * - **Field Type**: Slice Zone
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locker_experience.slices[]
+	 * - **Tab**: Experience
+	 * - **Documentation**: https://prismic.io/docs/slices
+	 */
+	slices: prismic.SliceZone<LockerExperienceDocumentDataSlicesSlice>;/**
+	 * Meta Title field in *locker_experience*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: A title of the page used for social media and search engines
+	 * - **API ID Path**: locker_experience.meta_title
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	meta_title: prismic.KeyTextField;
+	
+	/**
+	 * Meta Description field in *locker_experience*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: A brief summary of the page
+	 * - **API ID Path**: locker_experience.meta_description
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	meta_description: prismic.KeyTextField;
+	
+	/**
+	 * Meta Image field in *locker_experience*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locker_experience.meta_image
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	meta_image: prismic.ImageField<never>;/**
+	 * Title field in *locker_experience*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locker_experience.title
+	 * - **Tab**: Content
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	title: prismic.RichTextField;
+	
+	/**
+	 * Description field in *locker_experience*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locker_experience.description
+	 * - **Tab**: Content
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	description: prismic.RichTextField;
+	
+	/**
+	 * Cta field in *locker_experience*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locker_experience.cta
+	 * - **Tab**: Content
+	 * - **Documentation**: https://prismic.io/docs/fields/link
+	 */
+	cta: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+	
+	/**
+	 * Loading Text field in *locker_experience*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locker_experience.loading_text
+	 * - **Tab**: Content
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	loading_text: prismic.KeyTextField;
+}
+
+/**
+ * locker_experience document from Prismic
+ *
+ * - **API ID**: `locker_experience`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type LockerExperienceDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<LockerExperienceDocumentData>, "locker_experience", Lang>;
+
+export type AllDocumentTypes = ExperienceTemplateDocument | LockerExperienceDocument;
 
 declare module "@prismicio/client" {
 	interface CreateClient {
@@ -190,6 +348,10 @@ declare module "@prismicio/client" {
 			ExperienceTemplateDocument,
 			ExperienceTemplateDocumentData,
 			ExperienceTemplateDocumentDataSlicesSlice,
+			LockerExperienceDocument,
+			LockerExperienceDocumentData,
+			LockerExperienceDocumentDataObjectsItem,
+			LockerExperienceDocumentDataSlicesSlice,
 			AllDocumentTypes
 		}
 	}
