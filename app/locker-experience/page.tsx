@@ -3,12 +3,15 @@ import { asText } from "@prismicio/client";
 
 import { createClient } from "@/prismicio";
 import LockerExperienceView from "@/experiences/locker";
+import { resolveItems } from "@/experiences/locker/resolveItems";
 
 export default async function Page() {
 	const client = createClient();
 	const page = await client.getSingle("locker_experience");
 
-	return <LockerExperienceView content={page.data} />;
+	const items = resolveItems(page.data);
+
+	return <LockerExperienceView items={items} content={page.data} />;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
