@@ -1,10 +1,25 @@
-import { SliceZone } from "@prismicio/react";
+import type { Metadata } from "next";
+import { asText } from "@prismicio/client";
+
 import { createClient } from "@/prismicio";
-import { components } from "@/slices";
+import LockerExperienceView from "@/experiences/locker";
 
 export default async function Page() {
 	const client = createClient();
 	const page = await client.getSingle("locker_experience");
 
-	return <SliceZone slices={page.data.slices} components={components} />;
+	return <LockerExperienceView content={page.data} />;
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+	const client = createClient();
+	const page = await client.getSingle("locker_experience");
+
+	return {
+		title: page.data.meta_title ?? asText(page.data.title),
+		description: page.data.meta_description,
+		openGraph: {
+			images: page.data.meta_image.url ? [page.data.meta_image.url] : undefined,
+		},
+	};
 }
