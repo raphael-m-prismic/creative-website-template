@@ -81,14 +81,3 @@ export function CameraRig() {
 
 	return null;
 }
-
-/** Debug sliders: tune values, paste above. The rig is unmounted in debug. */
-export function CameraRigControls() {
-	useControls("camera", {
-		yawAmplitude: { value: YAW_AMPLITUDE, min: 0, max: 0.5, step: 0.01 },
-		pitchAmplitude: { value: PITCH_AMPLITUDE, min: 0, max: 0.3, step: 0.01 },
-		damping: { value: DAMPING, min: 0.0001, max: 0.2, step: 0.0001 },
-	});
-
-	return null;
-}

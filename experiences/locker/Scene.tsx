@@ -5,7 +5,7 @@ import { DoubleSide } from "three";
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
 
-import { CameraRig, CameraRigControls } from "./CameraRig";
+import { CameraRig } from "./CameraRig";
 import { Items } from "./Items";
 import { Locker } from "./Locker";
 import { SceneReady } from "../_shared/SceneReady";
@@ -63,7 +63,6 @@ export function Scene({ items, onReady }: Props) {
 			{debug ? (
 				<>
 					<OrbitControls enablePan={false} />
-					<CameraRigControls />
 				</>
 			) : (
 				<CameraRig />
