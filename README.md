@@ -13,8 +13,10 @@ Built with Next.js, Prismic and React Three Fiber.
 
 | Route | Folder | What it is |
 | --- | --- | --- |
-| `/experience-template` | `experiences/_template` | A cube. The reference: the smallest complete wiring, meant to be duplicated for a new experience. |
+| `/experience-template` | `experiences/_template` | The reference wiring, deliberately plain: a cube whose color is a Prismic field, a Suzanne whose position is a select, and a sphere whose PBR maps are Prismic images. Duplicate this folder to start a new experience. |
 | `/locker-experience` | `experiences/locker` | The real one: a GLB locker, textured planes on shelves, hover outline, label tag, pointer-driven camera. |
+
+The template exists to show the range of what a field can drive — a value, a code-defined position, a set of assets — with nothing to distract from the wiring.
 
 ## Running it
 
@@ -31,20 +33,21 @@ npx prismic pull   # writes customtypes/ and prismicio-types.d.ts
 
 **Commit what `pull` writes.** Without it the repo drifts from Prismic, and the content model becomes invisible to anyone reading the code.
 
-Add `?debug` to either route for a leva panel and OrbitControls: use it to place objects, read the values, paste them into the code.
+Add `?debug` to either route for a leva panel, OrbitControls and helpers: use it to place objects, read the values, paste them into the code.
 
 ## What the editor owns, and what the code owns
 
 This split is the whole point.
 
-**Prismic owns _what_ goes in the scene.** Item visuals, labels, links, and their order. Plus page copy, the CTA and SEO.
+**Prismic owns _what_ is in the scene.** Which visuals, which labels, which links, in which order. Which texture maps dress a material, which color a mesh takes.
 
-**The code owns _where_ and _how_.** `slots.ts` declares each position, rotation and size. Lighting, camera feel, shadows, materials, the hover outline shader — none of it is exposed. An editor can fill the locker; they cannot break the art direction.
+**The code owns _where_ and _how_.** `slots.ts` declares every position, rotation and size. Lighting, camera feel, shadows, materials, the outline shader — none of it is exposed. An editor can fill the locker; they cannot break the art direction.
 
-Two consequences worth noting:
+Three consequences worth knowing:
 
 - Objects fill slots **in the order they appear in Prismic**. Reordering the group moves them in the scene; extras beyond the slot count are ignored.
 - Plane proportions are **derived**, not configured. The height comes from the slot, the width from the image's own ratio, so a tall umbrella and a square handbag both sit correctly with nothing to adjust.
+- The scene **reacts to what the content contains**. Upload a displacement map and the sphere is rebuilt at a higher segment count, because displacement needs real geometry to move. The editor never learns why.
 
 ## How a page is put together
 
@@ -57,23 +60,25 @@ app/locker-experience/page.tsx     server: fetches the document
               └── LoadingScreen.tsx
 ```
 
-**`resolveItems` is the boundary.** It turns a Prismic document into a plain array — texture URLs sized by the code, positions resolved from slots, image ratios computed. Everything downstream consumes that array, so:
+**The resolve step is the boundary** — `resolveItems.ts` here, `resolveContent.ts` in the template. It turns a Prismic document into plain data: texture URLs sized by the code, positions resolved from slots, image ratios computed, defaults applied. Everything downstream consumes that, so:
 
 - the 3D code imports nothing from Prismic and runs on hardcoded values, with no CMS and no network;
 - validation and defaults live in one place;
 - swapping the content source touches one file.
 
+It is also where CMS-specific knowledge is documented rather than scattered: why data maps opt out of automatic recompression, why a non-repeatable group still arrives as an array.
+
 The DOM overlay is the deliberate exception: it consumes Prismic fields directly, because `PrismicRichText` and `PrismicNextLink` are the right tool there. The boundary protects the creative code, not the interface.
 
 ## What is shared, and what is not
 
-`experiences/_shared` holds the _when_, never the _what_ — timing and flags, no design:
+`experiences/_shared` holds the _when_ of loading and the debug flag, never the _what_:
 
-- `useLoadingScreen` — headless: returns state and props to spread, no markup, no class names.
+- `useLoadingScreen` — headless: returns state and props to spread, no markup, no class names. Each experience writes its own loading screen.
 - `SceneReady` / `useSceneReady` — bridges inside-the-Canvas to outside. A loading screen is DOM and cannot see frames, so something in the scene reports out once assets have resolved _and_ a few frames have actually been painted. Decoding finishing is not the same as the scene being on screen.
-- `useDebug` / `DebugPanel` — reads `?debug` after mount, so SSR and the first render agree, and mounts leva when it is set. _Whether_ the panel is open is shared; what each experience puts in it is not.
+- `useDebug` / `DebugPanel` — the `?debug` URL flag and the leva panel.
 
-Everything else belongs to its experience: each one writes its own loading screen, its own lights, its own camera, its own scene graph. Two creative experiences have nothing visual in common, and a shared abstraction trying to cover both would be worked around by the third.
+Everything else belongs to its experience: its own lights, its own camera, its own scene graph, its own resolve step. Two creative experiences have nothing visual in common, and a shared abstraction trying to cover both would be worked around by the third.
 
 ## Adding an experience
 
@@ -86,11 +91,12 @@ That is the point of the skeleton: the wiring, the folder convention, the loadin
 
 ## Publishing
 
-`prismic init` set up `/api/revalidate`. Point a Prismic webhook at it and publishing invalidates the `prismic` cache tag, so pages re-render on demand instead of requiring a full rebuild. Preview routes (`/api/preview`, `/api/exit-preview`) are wired too, so unpublished changes can be viewed before they go live.
+`prismic init` set up `/api/revalidate`. A Prismic webhook points at it, so publishing invalidates the `prismic` cache tag and the affected pages regenerate on the next request — no rebuild, no redeploy. The change is live within seconds.
 
-## Notes and known gaps
+Preview routes (`/api/preview`, `/api/exit-preview`) are wired too, so unpublished changes can be viewed before they go live.
+
+## Notes
 
 - **This is a POC.** The visuals are placeholders, not Powster's or Amazon's artwork.
-- The locker uses drei's `Environment` preset, which downloads an HDRI from an external CDN at runtime. Fine locally, worth replacing with local `Lightformer`s before demoing on an unreliable network.
 - leva ships in the client bundle even without `?debug`. A dynamic import behind the flag would fix it; not worth it at this size.
 - The hover outline dilates the texture's alpha in a shader, so it follows the artwork's cutout rather than the plane's rectangle. Thickness is a single constant in `ItemOutline.tsx`.
