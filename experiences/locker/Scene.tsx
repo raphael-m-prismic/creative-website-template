@@ -1,12 +1,12 @@
 "use client";
 
 import { Suspense } from "react";
-import { DoubleSide } from "three";
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
 
 import { CameraRig } from "./CameraRig";
 import { Items } from "./Items";
+import { Floor } from "./Floor";
 import { Locker } from "./Locker";
 import { SceneReady } from "../_shared/SceneReady";
 import type { LockerItem } from "./resolveItems";
@@ -47,23 +47,11 @@ export function Scene({ items, onReady }: Props) {
 				<SceneReady onReady={onReady} />
 			</Suspense>
 
-			<mesh
-				position={[0, GROUND_Y, 0]}
-				rotation-x={-Math.PI * 0.5}
-				receiveShadow
-			>
-				<planeGeometry args={[30, 6]} />
-				<meshStandardMaterial
-					color={"white"}
-					side={DoubleSide}
-				/>
-			</mesh>
+			<Floor position={[0, GROUND_Y, 0]} />
 
 			{/* One camera owner at a time: both would fight over the transform. */}
 			{debug ? (
-				<>
-					<OrbitControls enablePan={false} />
-				</>
+				<OrbitControls enablePan={false} />
 			) : (
 				<CameraRig />
 			)}
