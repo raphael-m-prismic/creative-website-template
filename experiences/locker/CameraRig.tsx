@@ -2,7 +2,6 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useControls } from "leva";
 
 /**
  * Camera feel, declared here and only here. Kept on a sphere around the origin

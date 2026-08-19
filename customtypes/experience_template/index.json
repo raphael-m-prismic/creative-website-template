@@ -102,17 +102,6 @@
           "placeholder": ""
         },
         "type": "StructuredText"
-      },
-      "cta": {
-        "config": {
-          "allowTargetBlank": true,
-          "allowText": true,
-          "label": "Cta",
-          "placeholder": "",
-          "repeat": true,
-          "select": null
-        },
-        "type": "Link"
       }
     },
     "SEO & Metadata": {

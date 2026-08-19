@@ -160,18 +160,7 @@ interface ExperienceTemplateDocumentData {
 	 * - **Tab**: Content
 	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
 	 */
-	description: prismic.RichTextField;
-	
-	/**
-	 * Cta field in *experience_template*
-	 *
-	 * - **Field Type**: Link
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: experience_template.cta
-	 * - **Tab**: Content
-	 * - **Documentation**: https://prismic.io/docs/fields/link
-	 */
-	cta: prismic.Repeatable<prismic.LinkField<string, string, unknown, prismic.FieldState, never>>;/**
+	description: prismic.RichTextField;/**
 	 * Meta Title field in *experience_template*
 	 *
 	 * - **Field Type**: Text
