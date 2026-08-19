@@ -16,13 +16,40 @@ const DEFAULT_COLOR = "#8b8b8b";
 /** The code owns texture dimensions, not the editor. */
 const TEXTURE_SIZE = 1024;
 
+const COLOR_MAP_PARAMS = {
+	w: TEXTURE_SIZE,
+	h: TEXTURE_SIZE,
+	fit: "crop",
+} as const;
+
+/**
+ * Data maps are not pictures: a normal map stores an XYZ vector and a
+ * displacement map stores a height. Prismic serves images with
+ * `auto=compress,format`, which would re-encode them as lossy WebP and turn
+ * that data into artefacts. `auto: undefined` drops the param and delivers
+ * the source PNG untouched.
+ */
+const DATA_MAP_PARAMS = { ...COLOR_MAP_PARAMS, auto: undefined } as const;
+
+/**
+ * Every map the sphere material can use. Each one is optional: the editor
+ * can ship a diffuse map alone, or a full PBR set.
+ */
+export type SphereTextures = {
+	diffuseUrl: string | null;
+	displacementUrl: string | null;
+	normalUrl: string | null;
+	roughnessUrl: string | null;
+};
+
 /**
  * The shape the 3D code works with. It knows nothing about Prismic.
  */
 export type TemplateExperience = {
 	cube_color: string;
 	suzanne_position: [number, number, number];
-	sphere_textureUrl: string | null;
+	/** null when every map is empty, so the sphere can fall back to a flat color. */
+	sphere_textures: SphereTextures | null;
 };
 
 /**
@@ -42,13 +69,25 @@ export function resolveContent(
 		);
 	}
 
+	/**
+	 * A non-repeatable group still arrives as an array of zero or one item, and
+	 * it is missing entirely from documents published before the field existed —
+	 * which the generated types cannot know about.
+	 */
+	const maps = data.sphere_textures?.[0];
+
+	const sphereTextures: SphereTextures = {
+		diffuseUrl: prismic.asImageSrc(maps?.diffuse_map, COLOR_MAP_PARAMS),
+		displacementUrl: prismic.asImageSrc(maps?.displacement_map, DATA_MAP_PARAMS),
+		normalUrl: prismic.asImageSrc(maps?.normal_map, DATA_MAP_PARAMS),
+		roughnessUrl: prismic.asImageSrc(maps?.roughness_map, DATA_MAP_PARAMS),
+	};
+
 	return {
 		cube_color: data.cube_color ?? DEFAULT_COLOR,
 		suzanne_position: position ?? SLOTS.middle,
-		sphere_textureUrl: prismic.asImageSrc(data.sphere_texture, {
-			w: TEXTURE_SIZE,
-			h: TEXTURE_SIZE,
-			fit: "crop",
-		}),
+		sphere_textures: Object.values(sphereTextures).some(Boolean)
+			? sphereTextures
+			: null,
 	};
 }

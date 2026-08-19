@@ -46,6 +46,51 @@ type ContentRelationshipFieldWithData<
 		>
 }[Exclude<TCustomType[number], string>["id"]];
 
+/**
+ * Item in *experience_template → Sphere Textures*
+ */
+export interface ExperienceTemplateDocumentDataSphereTexturesItem {
+	/**
+	 * Diffuse field in *experience_template → Sphere Textures*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: experience_template.sphere_textures[].diffuse_map
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	diffuse_map: prismic.ImageField<never>;
+	
+	/**
+	 * Displacement field in *experience_template → Sphere Textures*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: experience_template.sphere_textures[].displacement_map
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	displacement_map: prismic.ImageField<never>;
+	
+	/**
+	 * Normal field in *experience_template → Sphere Textures*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: experience_template.sphere_textures[].normal_map
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	normal_map: prismic.ImageField<never>;
+	
+	/**
+	 * Roughness field in *experience_template → Sphere Textures*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: experience_template.sphere_textures[].roughness_map
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	roughness_map: prismic.ImageField<never>;
+}
+
 type ExperienceTemplateDocumentDataSlicesSlice = never
 
 /**
@@ -76,15 +121,15 @@ interface ExperienceTemplateDocumentData {
 	suzanne_position: prismic.SelectField<"middle" | "top" | "bottom", "filled">;
 	
 	/**
-	 * Sphere texture field in *experience_template*
+	 * Sphere Textures field in *experience_template*
 	 *
-	 * - **Field Type**: Image
+	 * - **Field Type**: Group
 	 * - **Placeholder**: *None*
-	 * - **API ID Path**: experience_template.sphere_texture
+	 * - **API ID Path**: experience_template.sphere_textures[]
 	 * - **Tab**: Experience
-	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
 	 */
-	sphere_texture: prismic.ImageField<never>;
+	sphere_textures: prismic.GroupField<Simplify<ExperienceTemplateDocumentDataSphereTexturesItem>>;
 	
 	/**
 	 * Slice Zone field in *experience_template*
@@ -348,6 +393,7 @@ declare module "@prismicio/client" {
 		export type {
 			ExperienceTemplateDocument,
 			ExperienceTemplateDocumentData,
+			ExperienceTemplateDocumentDataSphereTexturesItem,
 			ExperienceTemplateDocumentDataSlicesSlice,
 			LockerExperienceDocument,
 			LockerExperienceDocumentData,

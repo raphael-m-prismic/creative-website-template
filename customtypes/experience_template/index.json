@@ -23,16 +23,58 @@
         },
         "type": "Select"
       },
-      "sphere_texture": {
+      "sphere_textures": {
         "config": {
-          "constraint": {
-            "height": 1024,
-            "width": 1024
+          "fields": {
+            "diffuse_map": {
+              "config": {
+                "constraint": {
+                  "height": 1024,
+                  "width": 1024
+                },
+                "label": "Diffuse",
+                "thumbnails": []
+              },
+              "type": "Image"
+            },
+            "displacement_map": {
+              "config": {
+                "constraint": {
+                  "height": 1024,
+                  "width": 1024
+                },
+                "label": "Displacement",
+                "thumbnails": []
+              },
+              "type": "Image"
+            },
+            "normal_map": {
+              "config": {
+                "constraint": {
+                  "height": 1024,
+                  "width": 1024
+                },
+                "label": "Normal",
+                "thumbnails": []
+              },
+              "type": "Image"
+            },
+            "roughness_map": {
+              "config": {
+                "constraint": {
+                  "height": 1024,
+                  "width": 1024
+                },
+                "label": "Roughness",
+                "thumbnails": []
+              },
+              "type": "Image"
+            }
           },
-          "label": "Sphere texture",
-          "thumbnails": []
+          "label": "Sphere Textures",
+          "repeat": false
         },
-        "type": "Image"
+        "type": "Group"
       },
       "slices": {
         "config": {
