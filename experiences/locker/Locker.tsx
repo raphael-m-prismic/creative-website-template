@@ -1,22 +1,13 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect } from "react";
 import { Center, useGLTF } from "@react-three/drei";
-import { Box3, Group, Mesh, Vector3 } from "three";
+import { Mesh } from "three";
 
 const MODEL_PATH = "/models/locker.glb";
 
 export function Locker() {
 	const { scene } = useGLTF(MODEL_PATH);
-	const ref = useRef<Group>(null);
-
-	useLayoutEffect(() => {
-		if (process.env.NODE_ENV === "production" || !ref.current) return;
-
-		const box = new Box3().setFromObject(ref.current);
-		const size = box.getSize(new Vector3());
-
-	}, []);
 
 	useLayoutEffect(() => {
 		scene.traverse((object) => {
@@ -29,7 +20,7 @@ export function Locker() {
 
 	return (
 		<Center>
-			<primitive ref={ref} object={scene} />
+			<primitive object={scene} />
 		</Center>
 	);
 }
