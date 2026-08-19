@@ -63,12 +63,6 @@ export function resolveContent(
 	const slot = data.suzanne_position ?? "middle";
 	const position = SLOTS[slot];
 
-	if (!position && process.env.NODE_ENV !== "production") {
-		console.warn(
-			`[_template] Unknown slot "${data.suzanne_position}". Falling back to "middle".`,
-		);
-	}
-
 	/**
 	 * A non-repeatable group still arrives as an array of zero or one item, and
 	 * it is missing entirely from documents published before the field existed —
@@ -85,7 +79,7 @@ export function resolveContent(
 
 	return {
 		cube_color: data.cube_color ?? DEFAULT_COLOR,
-		suzanne_position: position ?? SLOTS.middle,
+		suzanne_position: position,
 		sphere_textures: Object.values(sphereTextures).some(Boolean)
 			? sphereTextures
 			: null,
