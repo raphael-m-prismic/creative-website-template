@@ -5,7 +5,7 @@ import { Html, useTexture } from "@react-three/drei";
 import { SRGBColorSpace } from "three";
 
 import { ItemOutline } from "./ItemOutline";
-import type { LockerItem } from "./resolveItems";
+import type { LockerItem } from "./resolveContent";
 
 type Props = {
 	item: LockerItem;

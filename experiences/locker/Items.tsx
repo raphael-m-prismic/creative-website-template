@@ -3,7 +3,7 @@
 import { useControls } from "leva";
 
 import { Item } from "./Item";
-import type { LockerItem } from "./resolveItems";
+import type { LockerItem } from "./resolveContent";
 import { SLOTS, type Slot } from "./slots";
 
 type Props = {

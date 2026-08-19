@@ -9,7 +9,7 @@ import { Items } from "./Items";
 import { Floor } from "./Floor";
 import { Locker } from "./Locker";
 import { SceneReady } from "../_shared/SceneReady";
-import type { LockerItem } from "./resolveItems";
+import type { LockerItem } from "./resolveContent";
 import { useDebug } from "../_shared/useDebug";
 
 const GROUND_Y = -0.941;

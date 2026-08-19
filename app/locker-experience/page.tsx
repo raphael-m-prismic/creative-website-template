@@ -3,13 +3,13 @@ import { asText } from "@prismicio/client";
 
 import { createClient } from "@/prismicio";
 import LockerExperienceView from "@/experiences/locker";
-import { resolveItems } from "@/experiences/locker/resolveItems";
+import { resolveContent } from "@/experiences/locker/resolveContent";
 
 export default async function Page() {
 	const client = createClient();
 	const page = await client.getSingle("locker_experience");
 
-	const items = resolveItems(page.data);
+	const items = resolveContent(page.data);
 
 	return <LockerExperienceView items={items} content={page.data} />;
 }

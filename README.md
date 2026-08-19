@@ -1,11 +1,11 @@
 # Creative experiences with Prismic
 
-A proof of concept inspired by [Elle's Locker](https://www.amazon.com/salp/elleslocker): a bespoke 3D scene where clickable objects link out, with everything an editor should own coming from a CMS.
+A proof of concept inspired by [Elle's Locker](https://www.amazon.com/salp/elleslocker): a creative 3D scene where clickable objects link out, with everything an editor should own coming from a CMS.
 
 It answers two questions:
 
 1. **Can several distinct 3D experiences live in one project?** Yes — each one gets its own page type and its own folder, sharing a skeleton but no design.
-2. **Can a bespoke experience stay editable?** Yes — a marketer swaps a visual, renames an item, changes a link or reorders the objects in Prismic, without a developer.
+2. **Can a strong creative experience stay editable?** Yes — a marketer swaps a visual, renames an item, changes a link or reorders the objects in Prismic, without a developer.
 
 Built with Next.js, Prismic and React Three Fiber.
 
@@ -53,14 +53,14 @@ Three consequences worth knowing:
 
 ```
 app/locker-experience/page.tsx     server: fetches the document
-  └── resolveItems.ts              the only file that understands Prismic
+  └── resolveContent.ts            the only file that understands Prismic
         └── index.tsx              the experience view
               ├── Scene.tsx        <Canvas>, lights, camera, 3D logic
               ├── Overlay.tsx      DOM layer: title, CTA, copy
               └── LoadingScreen.tsx
 ```
 
-**The resolve step is the boundary** — `resolveItems.ts` here, `resolveContent.ts` in the template. It turns a Prismic document into plain data: texture URLs sized by the code, positions resolved from slots, image ratios computed, defaults applied. Everything downstream consumes that, so:
+**`resolveContent.ts` is the boundary.** Every experience has one, always under that name: it is a role, not a description of what happens to live in it. It turns a Prismic document into plain data: texture URLs sized by the code, positions resolved from slots, image ratios computed, defaults applied. Everything downstream consumes that, so:
 
 - the 3D code imports nothing from Prismic and runs on hardcoded values, with no CMS and no network;
 - validation and defaults live in one place;
@@ -99,4 +99,3 @@ Preview routes (`/api/preview`, `/api/exit-preview`) are wired too, so unpublish
 
 - **This is a POC.** The visuals are placeholders, not Powster's or Amazon's artwork.
 - leva ships in the client bundle even without `?debug`. A dynamic import behind the flag would fix it; not worth it at this size.
-- The hover outline dilates the texture's alpha in a shader, so it follows the artwork's cutout rather than the plane's rectangle. Thickness is a single constant in `ItemOutline.tsx`.

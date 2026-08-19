@@ -7,7 +7,7 @@ import { DebugPanel } from "../_shared/DebugPanel";
 import { LoadingScreen } from "./LoadingScreen";
 import { Overlay } from "./Overlay";
 import { Scene } from "./Scene";
-import type { LockerItem } from "./resolveItems";
+import type { LockerItem } from "./resolveContent";
 
 type Props = {
 	items: LockerItem[];

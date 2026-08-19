@@ -23,7 +23,7 @@ export type LockerItem = {
  * Objects without an image are dropped; extra objects beyond the number of
  * slots are ignored.
  */
-export function resolveItems(
+export function resolveContent(
 	data: Content.LockerExperienceDocument["data"],
 ): LockerItem[] {
 	const items: LockerItem[] = [];
