@@ -3,32 +3,33 @@
   "id": "experience_template",
   "json": {
     "Experience": {
-      "position": {
+      "cube_color": {
         "config": {
-          "label": "Position",
+          "label": "Cube Color",
+          "placeholder": ""
+        },
+        "type": "Color"
+      },
+      "suzanne_position": {
+        "config": {
+          "default_value": "middle",
+          "label": "Suzanne Position",
           "options": [
-            "center",
-            "left",
-            "right"
+            "middle",
+            "top",
+            "bottom"
           ],
           "placeholder": ""
         },
         "type": "Select"
       },
-      "color": {
-        "config": {
-          "label": "Color",
-          "placeholder": ""
-        },
-        "type": "Color"
-      },
-      "texture": {
+      "sphere_texture": {
         "config": {
           "constraint": {
             "height": 1024,
             "width": 1024
           },
-          "label": "Texture",
+          "label": "Sphere texture",
           "thumbnails": []
         },
         "type": "Image"

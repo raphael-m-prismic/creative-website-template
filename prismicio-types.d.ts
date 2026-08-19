@@ -53,37 +53,38 @@ type ExperienceTemplateDocumentDataSlicesSlice = never
  */
 interface ExperienceTemplateDocumentData {
 	/**
-	 * Position field in *experience_template*
-	 *
-	 * - **Field Type**: Select
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: experience_template.position
-	 * - **Tab**: Experience
-	 * - **Documentation**: https://prismic.io/docs/fields/select
-	 */
-	position: prismic.SelectField<"center" | "left" | "right">;
-	
-	/**
-	 * Color field in *experience_template*
+	 * Cube Color field in *experience_template*
 	 *
 	 * - **Field Type**: Color
 	 * - **Placeholder**: *None*
-	 * - **API ID Path**: experience_template.color
+	 * - **API ID Path**: experience_template.cube_color
 	 * - **Tab**: Experience
 	 * - **Documentation**: https://prismic.io/docs/fields/color
 	 */
-	color: prismic.ColorField;
+	cube_color: prismic.ColorField;
 	
 	/**
-	 * Texture field in *experience_template*
+	 * Suzanne Position field in *experience_template*
+	 *
+	 * - **Field Type**: Select
+	 * - **Placeholder**: *None*
+	 * - **Default Value**: middle
+	 * - **API ID Path**: experience_template.suzanne_position
+	 * - **Tab**: Experience
+	 * - **Documentation**: https://prismic.io/docs/fields/select
+	 */
+	suzanne_position: prismic.SelectField<"middle" | "top" | "bottom", "filled">;
+	
+	/**
+	 * Sphere texture field in *experience_template*
 	 *
 	 * - **Field Type**: Image
 	 * - **Placeholder**: *None*
-	 * - **API ID Path**: experience_template.texture
+	 * - **API ID Path**: experience_template.sphere_texture
 	 * - **Tab**: Experience
 	 * - **Documentation**: https://prismic.io/docs/fields/image
 	 */
-	texture: prismic.ImageField<never>;
+	sphere_texture: prismic.ImageField<never>;
 	
 	/**
 	 * Slice Zone field in *experience_template*
@@ -242,37 +243,6 @@ interface LockerExperienceDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/slices
 	 */
 	slices: prismic.SliceZone<LockerExperienceDocumentDataSlicesSlice>;/**
-	 * Meta Title field in *locker_experience*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: A title of the page used for social media and search engines
-	 * - **API ID Path**: locker_experience.meta_title
-	 * - **Tab**: SEO & Metadata
-	 * - **Documentation**: https://prismic.io/docs/fields/text
-	 */
-	meta_title: prismic.KeyTextField;
-	
-	/**
-	 * Meta Description field in *locker_experience*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: A brief summary of the page
-	 * - **API ID Path**: locker_experience.meta_description
-	 * - **Tab**: SEO & Metadata
-	 * - **Documentation**: https://prismic.io/docs/fields/text
-	 */
-	meta_description: prismic.KeyTextField;
-	
-	/**
-	 * Meta Image field in *locker_experience*
-	 *
-	 * - **Field Type**: Image
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: locker_experience.meta_image
-	 * - **Tab**: SEO & Metadata
-	 * - **Documentation**: https://prismic.io/docs/fields/image
-	 */
-	meta_image: prismic.ImageField<never>;/**
 	 * Title field in *locker_experience*
 	 *
 	 * - **Field Type**: Rich Text
@@ -314,7 +284,38 @@ interface LockerExperienceDocumentData {
 	 * - **Tab**: Content
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
-	loading_text: prismic.KeyTextField;
+	loading_text: prismic.KeyTextField;/**
+	 * Meta Title field in *locker_experience*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: A title of the page used for social media and search engines
+	 * - **API ID Path**: locker_experience.meta_title
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	meta_title: prismic.KeyTextField;
+	
+	/**
+	 * Meta Description field in *locker_experience*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: A brief summary of the page
+	 * - **API ID Path**: locker_experience.meta_description
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	meta_description: prismic.KeyTextField;
+	
+	/**
+	 * Meta Image field in *locker_experience*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locker_experience.meta_image
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	meta_image: prismic.ImageField<never>;
 }
 
 /**
