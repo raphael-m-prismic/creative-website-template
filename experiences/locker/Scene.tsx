@@ -41,7 +41,7 @@ export function Scene({ items, onReady }: Props) {
 			/>
 
 			<Suspense fallback={null}>
-				<Environment preset="sunset" />
+				<Environment files="/hdri/sunset.hdr" />
 				<Locker />
 				<Items items={items} debug={debug} />
 				<SceneReady onReady={onReady} />
