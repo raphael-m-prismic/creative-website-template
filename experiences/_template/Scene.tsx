@@ -21,22 +21,22 @@ export function Scene({ experience, onReady }: Props) {
 	const debug = useDebug();
 
 	return (
-		<Canvas camera={{ position: [0, 0, 7], fov: 45 }} dpr={[1, 2]} shadows>
+		<Canvas camera={{ position: [0, 0, 10], fov: 45 }} dpr={[1, 2]} shadows>
 			<color attach="background" args={['#ffffff']} />
 
 			<OrbitControls enablePan={false} />
 
 			<ambientLight intensity={2} />
 			<directionalLight
-				position={[-3, 6, -2]}
+				position={[-2, 6, -2]}
 				intensity={1.4}
 				castShadow
 				shadow-mapSize={[2048, 2048]}
 				shadow-bias={-0.0005}
 				shadow-camera-near={0.5}
 				shadow-camera-far={20}
-				shadow-camera-left={-3}
-				shadow-camera-right={3}
+				shadow-camera-left={-6}
+				shadow-camera-right={6}
 				shadow-camera-top={3}
 				shadow-camera-bottom={-3}
 			/>
